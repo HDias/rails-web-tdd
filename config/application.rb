@@ -41,6 +41,8 @@ module RailsTdd
                        views_specs: false,
                        helpers_specs: false,
                        routing_specs: false
+      g.stylesheets false
+      g.helper false
     end
   end
 end
