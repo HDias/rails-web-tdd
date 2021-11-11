@@ -3,3 +3,18 @@
 <ul>
   <li><%= link_to 'New Customer', new_customer_path %></li>
 </ul>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+  </tr>
+  <% @customers.each do |customer| %>
+    <tr>
+      <td><%= customer.name %></td>
+      <td><%= customer.email %></td>
+      <td><%= customer.phone %></td>
+    </tr>
+  <% end %>
+</table>

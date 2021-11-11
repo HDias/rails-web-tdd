@@ -1,6 +1,8 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: %i[show]
-  def index; end
+  def index
+    @customers = Customer.all
+  end
 
   def show; end
 
@@ -12,7 +14,7 @@ class CustomersController < ApplicationController
     @customer = Customer.new(customer_params)
     
     if @customer.save
-      redirect_to customers_index_path, notice: 'Customer registered successfully'
+      redirect_to customers_path, notice: 'Customer registered successfully'
     else
       render :new
     end
