@@ -9,12 +9,16 @@
     <th>Name</th>
     <th>Email</th>
     <th>Phone</th>
+    <th></th>
+    <th></th>
   </tr>
   <% @customers.each do |customer| %>
     <tr>
       <td><%= customer.name %></td>
       <td><%= customer.email %></td>
       <td><%= customer.phone %></td>
+      <td class=".show"><%= link_to 'show', customer_path(customer.id)  %></td>
+      <td class=".edit"><%= link_to 'edit', edit_customer_path(customer.id)  %></td>
     </tr>
   <% end %>
 </table>
