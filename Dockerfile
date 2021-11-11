@@ -5,10 +5,18 @@ RUN curl https://deb.nodesource.com/setup_12.x | bash
 RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get update && apt-get install -y nodejs yarn
+
+RUN mkdir /rails_tdd
 WORKDIR /rails_tdd
-COPY Gemfile /rails_tdd/Gemfile
-COPY Gemfile.lock /rails_tdd/Gemfile.lock
+
+COPY Gemfile .
+COPY Gemfile.lock .
+RUN gem update bundler
 RUN bundle install
+
+COPY package.json .
+COPY yarn.lock .
+RUN yarn install
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
