@@ -98,4 +98,35 @@ RSpec.feature "Customers", type: :feature do
     expect(page).to have_content(customer_new_name)
     expect(page).to have_content(customer_new_phone)
   end
+
+  scenario 'Click show link' do
+    customer = Customer.create!(
+      name: Faker::Name.name,
+      email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number,
+      smoker: ['s', 'n'].sample,
+      avatar: "#{Rails.root}/spec/fixtures/avatar.jpeg"
+    )
+    visit(customers_path)
+    
+    find(:xpath, ".//table/tr/td[4]/a").click
+
+    # find('table').first('.show').find('a').click
+    expect(page).to have_content('Show Customer')
+    expect(page).to have_content(customer.name)
+  end
+
+  scenario 'Click Edit link' do
+    customer = Customer.create!(
+      name: Faker::Name.name,
+      email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number,
+      smoker: ['s', 'n'].sample,
+      avatar: "#{Rails.root}/spec/fixtures/avatar.jpeg"
+    )
+    visit(customers_path)
+
+    find(:xpath, ".//table/tr/td[5]/a").click
+    expect(page).to have_content('Edit Customer')
+  end
 end
